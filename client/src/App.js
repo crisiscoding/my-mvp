@@ -1,12 +1,15 @@
-import React, { useState } from "react"; //it wasn't here, strange!
+import React, { useEffect, useState } from "react"; //it wasn't here, strange!
 import "./App.css";
 import Cform from "./Cform";
 import Cgrid from "./Cgrid";
+import Homepage from "./Homepage";
 import Homegrid from "./Homegrid";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Navbar from "./Navbar";
+import postman_data from "./postman_data";
+import Cfeat from "./Cfeat";
+
 //import { Navbar } from "react-bootstrap";  it gives me a not defined error for navbar and home, this is googled
-//import Cgrid from "./Cgrid";
 //import Cfeat from "./Cfeat";
 
 //SOFIA
@@ -16,17 +19,51 @@ import Navbar from "./Navbar";
 
 function App() {
   //all the const for states and functions
+  const [items, setItems] = useState([]);
 
-  const [items, setItems] = useState(); //idk it had  DefaultItems and DefaultItems[0] for feat
-  //const [featItem, setFeatItem] = useState();
+  //idk it had  DefaultItems and DefaultItems[0] for feat
+  //const [featItem, setFeatItem] = useState(postman_data[0]);
   const [error, setError] = useState();
-  const handleAddItem = (newItem) => {
-    setItems((state) => [...state, newItem]);
-  };
-  //copied from fetch activity
-  async function getItems() {
-    let dataURL = `http://localhost5000/clothes`;
+  const [featItem, setFeatItem] = useState(postman_data[0]);
+  useEffect(() => {
+    getItems();
+  }, []);
 
+  const handleAddItem = (newItem) => {
+    setItems((state) => [...state, newItem]); //fech post db
+  };
+  //from my miles5, unfinished
+  async function addStudent(input) {
+    let options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json", //data format
+      },
+      body: JSON.stringify(input),
+    };
+    let data = null;
+
+    try {
+      let response = await fetch("/clothes", options);
+      if (response.ok) {
+        data = await response.json();
+        setItems(data);
+      } else {
+        console.log("server error:", response.statusText);
+      }
+    } catch (e) {
+      console.log("network error:", e.message);
+    }
+    return data;
+  }
+  //copied from meen&holly
+
+  //copied from fetch
+
+  async function getItems() {
+    //for grid
+    let dataURL = `/clothes`;
+    console.log("we are here");
     try {
       let response = await fetch(dataURL);
       if (response.ok) {
@@ -41,24 +78,29 @@ function App() {
     }
   }
 
-  //function showItem(id) {
-  //let featItem = items.find((p) => p.id === id);
-  //setFeatItem(featItem); }
-  //put into return once form works:
-  //<Cfeat featItem={featItem} />
-  //<Cgrid items={items} showItem={(id) => showItem(id)} />;
+  function showItem(id) {
+    console.log("here", id);
+    let featItem = items.find((p) => p.id === id);
+    console.log(featItem);
+    setFeatItem(featItem);
+  }
 
   return (
     <div className="App">
       <Navbar />
       <div className="content">
-        <p>This is the App/Homepage, I guess.</p>
         <Routes>
-          <Route path="/Add">
-            <Cform addItem={(newItem) => handleAddItem(newItem)} />
-          </Route>
-          <Route path="/Homewares">{/*<Homegrid get/>*/}</Route>
-          <Route path="/Clothes">{/*<Cgrid />*/}</Route>
+          <Route path="/" element={<Homepage />} />
+          <Route
+            path="/Add"
+            element={<Cform addItem={(newItem) => handleAddItem(newItem)} />}
+          />
+          <Route path="/FeatItem" element={<Cfeat featItem={featItem} />} />
+          <Route path="/Homewares" element={<Homegrid items={items} />} />
+          <Route
+            path="/Clothes"
+            element={<Cgrid items={items} showItem={(id) => showItem(id)} />}
+          />
         </Routes>
       </div>
     </div>

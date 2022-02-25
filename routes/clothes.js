@@ -8,11 +8,9 @@ const db = require("../model/helper");
 router.get("/", async (req, res) => {
   //this seems to work through postman, with info too!
   try {
-    let result = await db("SELECT * FROM clothes ORDER BY id ASC;").then(
-      (results) => {
-        res.send(results.data);
-      }
-    );
+    let results = await db("SELECT * FROM clothes ORDER BY id ASC;");
+
+    res.send(results.data);
   } catch (err) {
     res.status(500).send({ error: err.message });
   }

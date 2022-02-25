@@ -2,24 +2,23 @@
 
 import React, { useState } from "react";
 import "./Cform.css";
-//a lot of stuff here about react router that I don't remember
 
 const EMPTY_FORM = {
   picture: "",
   extra_pic: "",
   closet_section: "",
   date_purchase: "",
-  price: null,
+  price: "",
   shop: "",
   brand: "",
   season: "",
-  new_or_not: null,
-  ready_to_use: null,
+  new_or_not: "",
+  ready_to_use: "",
   materials: "",
   wash_sched: "",
   wash_info: "",
-  feeling: null,
-  upgrade: null,
+  feeling: "",
+  upgrade: "",
   notes: "",
 };
 
@@ -28,24 +27,45 @@ function Cform(props) {
   const [item, setItem] = useState(EMPTY_FORM); //item of clothing
 
   const handleInputChange = (e) => {
-    const value = e.target.value;
-    const name = e.target.name;
-    // const { name, value } = event.target;
+    //this part works
+    // const value = e.target.value;
+    //const name = e.target.name;
+    const { name, value } = e.target; //not sure what that is doing but it's what he uses for several fields
 
-    setItem((state) => ({
-      //I have the feeling this should work for anything but unsure
-      ...state,
+    setItem((item) => ({
+      ...item,
       [name]: value,
     }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    props.addItem(item);
-    // don't forget to accept the props in the arguments of the function AdminView
+    props.addItem(item); //this had item, newItem, e.... none worked
     setItem(EMPTY_FORM);
   };
+
+  async function addItem() {
+    let options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(item),
+    };
+
+    try {
+      let response = await fetch("/idk", options);
+      if (response.ok) {
+        let data = await response.json();
+        setItem(data); //not sure about this
+      } else {
+        console.log(`server error: ${response.status}`);
+      }
+    } catch (error) {
+      console.log(`network error: ${error.message}`);
+    }
+  }
+
   //-------
   return (
     <div className="Cform">
@@ -56,7 +76,7 @@ function Cform(props) {
           Main Picture *
           <input
             type="text"
-            name="pic"
+            name="picture"
             value={item.picture}
             onChange={handleInputChange}
           />
@@ -66,7 +86,7 @@ function Cform(props) {
           Extra Picture
           <input
             type="text"
-            name="extra pic"
+            name="extra_pic"
             value={item.extra_pic}
             onChange={handleInputChange}
           />
@@ -74,16 +94,19 @@ function Cform(props) {
 
         <label>
           Closet Section *
-          <input
-            type="text"
+          <select
             name="closet_section"
             value={item.closet_section}
             onChange={handleInputChange}
-          />
+          >
+            {" "}
+            <option value="home">Home</option>
+            <option value="clothes">Clothes</option>
+          </select>
         </label>
 
         <label>
-          Date of Purchase *
+          Date of Purchase * should be a drop down and today by default
           <input
             type="text"
             name="date_purchase"
@@ -95,18 +118,19 @@ function Cform(props) {
         <label>
           Price
           <input
-            type="number??????"
+            type="number"
             name="price"
             value={item.price}
             onChange={handleInputChange}
           />
+          Euros
         </label>
         <label>
-          Shop where you bought it
+          Shop
           <input
             type="text"
             name="shop"
-            value={item.price}
+            value={item.shop}
             onChange={handleInputChange}
           />
         </label>
@@ -120,31 +144,43 @@ function Cform(props) {
           />
         </label>
         <label>
-          Season you'll wear it the most *
-          <input
-            type="text"
+          Season
+          <select
             name="season"
             value={item.season}
             onChange={handleInputChange}
-          />
+          >
+            {" "}
+            <option value="all">All</option>
+            <option value="spring">Spring</option>
+            <option value="summer">Summer</option>
+            <option value="fall">Fall</option>
+            <option value="winter">Winter</option>
+          </select>
         </label>
         <label>
           Is it new or second hand? *
-          <input
-            type="text"
+          <select
             name="new_or_not"
             value={item.new_or_not}
             onChange={handleInputChange}
-          />
+          >
+            {" "}
+            <option value="new">New</option>
+            <option value="second-hand">Second hand</option>
+          </select>
         </label>
         <label>
           Is it ready to wear or going to the project pile/taylor? *
-          <input
-            type="text"
+          <select
             name="ready_to_use"
             value={item.ready_to_use}
             onChange={handleInputChange}
-          />
+          >
+            {" "}
+            <option value="ready">Ready</option>
+            <option value="project">Project</option>
+          </select>
         </label>
         <label>
           Materials
@@ -156,7 +192,7 @@ function Cform(props) {
           />
         </label>
         <label>
-          Does it have a washing schedule?
+          Washing schedule
           <input
             type="text"
             name="wash_sched"
@@ -165,7 +201,7 @@ function Cform(props) {
           />
         </label>
         <label>
-          Wash Info, like temperature, etc.
+          Wash Info
           <input
             type="text"
             name="wash_info"
@@ -174,23 +210,31 @@ function Cform(props) {
           />
         </label>
         <label>
-          How much do you like it? Does it spark joy?
-          <input
-            type="text"
+          How much do you like it?
+          <select
             name="feeling"
             value={item.feeling}
             onChange={handleInputChange}
-          />
+          >
+            {" "}
+            <option value="love">Love!</option>
+            <option value="like">like</option>
+            <option value="ok">It's ok</option>
+            <option value="meh">meh</option>
+          </select>
         </label>
 
         <label>
           Do you want to upgrade it?
-          <input
-            type="text"
+          <select
             name="upgrade"
             value={item.upgrade}
-            onChange={(e) => handleInputChange(e)}
-          />
+            onChange={handleInputChange}
+          >
+            {" "}
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+          </select>
         </label>
 
         <label>

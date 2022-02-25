@@ -5,6 +5,7 @@ export default function Cfeat(props) {
   <div>Cfeat</div>;
   let fi = props.featItem;
   useEffect(() => {}, [props.featItem]);
+
   return (
     <div className="FeaturedItem">
       <img src={fi.picture} alt={fi.notes} />

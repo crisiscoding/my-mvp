@@ -106,7 +106,7 @@ function Cform(props) {
         </label>
 
         <label>
-          Date of Purchase * should be a drop down and today by default
+          Date of Purchase
           <input
             type="text"
             name="date_purchase"
@@ -123,7 +123,6 @@ function Cform(props) {
             value={item.price}
             onChange={handleInputChange}
           />
-          Euros
         </label>
         <label>
           Shop
@@ -166,20 +165,20 @@ function Cform(props) {
             onChange={handleInputChange}
           >
             {" "}
-            <option value="new">New</option>
-            <option value="second-hand">Second hand</option>
+            <option value="0">New</option>
+            <option value="1">Second hand</option>
           </select>
         </label>
         <label>
-          Is it ready to wear or going to the project pile/taylor? *
+          Ready or project pile/taylor? *
           <select
             name="ready_to_use"
             value={item.ready_to_use}
             onChange={handleInputChange}
           >
             {" "}
-            <option value="ready">Ready</option>
-            <option value="project">Project</option>
+            <option value="0">Ready</option>
+            <option value="1">Project</option>
           </select>
         </label>
         <label>
@@ -217,10 +216,10 @@ function Cform(props) {
             onChange={handleInputChange}
           >
             {" "}
-            <option value="love">Love!</option>
-            <option value="like">like</option>
-            <option value="ok">It's ok</option>
-            <option value="meh">meh</option>
+            <option value="4">Love!</option>
+            <option value="3">like</option>
+            <option value="2">It's ok</option>
+            <option value="1">meh</option>
           </select>
         </label>
 
@@ -232,8 +231,8 @@ function Cform(props) {
             onChange={handleInputChange}
           >
             {" "}
-            <option value="no">No</option>
-            <option value="yes">Yes</option>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
           </select>
         </label>
 

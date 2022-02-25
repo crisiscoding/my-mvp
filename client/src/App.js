@@ -29,11 +29,11 @@ function App() {
     getItems();
   }, []);
 
-  const handleAddItem = (newItem) => {
-    setItems((state) => [...state, newItem]); //fech post db
-  };
+  //const handleAddItem = (newItem) => {
+  //setItems((state) => [...state, newItem]);};
+
   //from my miles5, unfinished
-  async function addStudent(input) {
+  async function handleAddItem(input) {
     let options = {
       method: "POST",
       headers: {
@@ -108,3 +108,4 @@ function App() {
 }
 
 export default App;
+//taking chances and erasing the id from the inside of this showItem={(id) => showItem(id)} didn't work

@@ -7,6 +7,7 @@
 
 export default [
   {
+    id: 1000,
     picture:
       "https://images.unsplash.com/photo-1590674752807-05e0ca142f01?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80",
     extra_pic: "",
@@ -27,6 +28,7 @@ export default [
   },
 
   {
+    id: 2000,
     picture:
       "https://images.unsplash.com/photo-1615599521184-e8796c4ca465?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80",
     extra_pic: "",
@@ -46,6 +48,7 @@ export default [
     notes: "gray duvet cover. It's a bit too big for the duvet.",
   },
   {
+    id: 3000,
     picture:
       "https://images.unsplash.com/photo-1598535746036-87d13382f6a6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8cGlsbG93fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
     extra_pic: "",
@@ -65,6 +68,7 @@ export default [
     notes: "basic white sheets. ",
   },
   {
+    id: 4000,
     picture:
       "https://images.unsplash.com/photo-1571189416642-9d145805cfd3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
     extra_pic: "",
@@ -84,60 +88,7 @@ export default [
     notes: "couch cover, getting a little deformed and tired.",
   },
   {
-    picture: "made to be deleted",
-    extra_pic: "let us be hopeful",
-    closet_section: "other",
-    date_purchase: "2001-02-02",
-    price: 3,
-    shop: "street market",
-    brand: "Pepita",
-    season: "spring",
-    new_or_not: 1,
-    ready_to_use: 0,
-    materials: "wool",
-    wash_sched: "monthly",
-    wash_info: "handwash",
-    feeling: 3,
-    upgrade: 1,
-    notes: "trying delete",
-  },
-  {
-    picture: "made to be deleted",
-    extra_pic: "let us be hopeful",
-    closet_section: "other",
-    date_purchase: "2001-02-02",
-    price: 3,
-    shop: "street market",
-    brand: "Pepita",
-    season: "spring",
-    new_or_not: 1,
-    ready_to_use: 0,
-    materials: "wool",
-    wash_sched: "monthly",
-    wash_info: "handwash",
-    feeling: 3,
-    upgrade: 1,
-    notes: "trying delete",
-  },
-  {
-    picture: "made to be deleted",
-    extra_pic: "let us be hopeful",
-    closet_section: "other",
-    date_purchase: "2001-02-02",
-    price: 3,
-    shop: "street market",
-    brand: "Pepita",
-    season: "spring",
-    new_or_not: 1,
-    ready_to_use: 0,
-    materials: "wool",
-    wash_sched: "monthly",
-    wash_info: "handwash",
-    feeling: 3,
-    upgrade: 1,
-    notes: "trying delete",
-  },
-  {
+    id: 5000,
     picture: "made to be deleted",
     extra_pic: "let us be hopeful",
     closet_section: "other",

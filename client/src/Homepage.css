@@ -1,12 +1,25 @@
 body {
   background-color: #cccccc;
   background-size: contain no-repeat;
+  text-align: center;
 }
 
-div {
-  width: auto;
+.Home {
+  width: 900px;
+  margin-left: 70px;
+  display: block;
 }
 
-li {
+.p1 {
   text-align: left;
+  background-color: #e6b1b1;
+}
+
+p {
+  margin-left: 50px;
+  text-align: left;
+}
+
+.true {
+  list-style-type: "*";
 }

@@ -2,11 +2,8 @@ var express = require("express");
 var router = express.Router();
 const db = require("../model/helper");
 
-/* GET home page. */
-router.get("/", function (req, res, next) {
-  res.send({ title: "whatever appliances" });
-  //res.render('index', { title: 'Express' });
-});
+//Nothing is implemented on the frontend for this yet.
+
 //should work
 router.get("/", async (req, res) => {
   try {
@@ -106,15 +103,13 @@ router.put("/:id", async (req, res) => {
     res.status(404).send({ error: err.message });
   }
 });
-//not doing this until clothes delete works
+//updated, untested
 router.delete("/", async (req, res) => {
-  let id = req.params.todo_id;
+  let id = req.params.id;
   try {
     let result = await db(`SELECT * FROM appliances WHERE  id = ${id}`);
 
     if (result.data.length === 1) {
-      let { text, complete } = req.body; //update this too!!!!
-
       await db(`DELETE FROM appliances WHERE id = ${id}`);
       result = await db("SELECT * FROM appliances");
       res.send(result.data);

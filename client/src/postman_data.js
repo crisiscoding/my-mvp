@@ -1,10 +1,3 @@
-//UPDATE clothes
-//SET picture = 'https://images.unsplash.com/flagged/photo-1585052201332-b8c0ce30972f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8ZHJlc3N8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60', materials = 'cotton'
-//WHERE id = 1;
-//UPDATE clothes
-//SET picture = 'https://images.unsplash.com/photo-1552558636-f6a8f071c2b3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8YmVkfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60', materials = 'linen', price = 120
-//WHERE id = 3;
-
 export default [
   {
     id: 1000,
@@ -14,7 +7,7 @@ export default [
     closet_section: "home",
     date_purchase: "2013-02-02",
     price: 100,
-    shop: "Mercade del Ferrocarril",
+    shop: "Mercado del Ferrocarril",
     brand: "Ecola",
     season: "winter",
     new_or_not: 1,
@@ -24,7 +17,7 @@ export default [
     wash_info: "handwash",
     feeling: 4,
     upgrade: 1,
-    notes: "my beautiful undyed portuguese wool blanket",
+    notes: "Undyed portuguese wool blanket",
   },
 
   {

@@ -1,32 +1,24 @@
-import React, { useEffect, useState } from "react"; //it wasn't here, strange!
+import React, { useEffect, useState } from "react";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Cform from "./Cform";
 import Cgrid from "./Cgrid";
+import Cfeat from "./Cfeat";
 import Homepage from "./Homepage";
 import Homegrid from "./Homegrid";
-import { Route, Routes } from "react-router-dom";
 import Navbar from "./Navbar";
-import postman_data from "./postman_data";
-import Cfeat from "./Cfeat";
-
-//import { Navbar } from "react-bootstrap";  it gives me a not defined error for navbar and home, this is googled
-//import Cfeat from "./Cfeat";
-
-//SOFIA
-//in the App component, create 3 buttons that render 3 different components: AddNewThing, Closet, Home
-//Create a fetch request in the App.js to get everything from clothes_and_lineans and pass the result to the childs (Closet, Home)
-//In Closet and Home, filter accordingly and display the data
 
 function App() {
-  //all the const for states and functions
-
   const [items, setItems] = useState([]);
-
+  const [books, setBooks] = useState([]);
   const [error, setError] = useState();
-  const [featItem, setFeatItem] = useState(postman_data[0]);
+
   useEffect(() => {
     getItems();
-  }, []); //now getItems is called anytime any component is rendered.  //postman_data[0]   //items[4]
+  }, []);
+  useEffect(() => {
+    getBooks();
+  }, []);
 
   async function handleAddItem(input) {
     let options = {
@@ -52,6 +44,23 @@ function App() {
     return data;
   }
 
+  async function getBooks() {
+    let dataURL = `/books`;
+    console.log("inside App.getBooks");
+    try {
+      let response = await fetch(dataURL);
+      if (response.ok) {
+        let data = await response.json();
+        console.log(data);
+        setBooks(data);
+      } else {
+        setError(`Server error: ${response.status} ${response.statusText}`);
+      }
+    } catch (err) {
+      setError(`Network error: ${error.message}`);
+    }
+  }
+
   async function getItems() {
     //it works
     let dataURL = `/clothes`;
@@ -70,24 +79,6 @@ function App() {
     }
   }
 
-  async function showItem(i) {
-    /* let dataURL = `/clothes/${id}`;
-    console.log("inside App.showItem", dataURL);
-    try {
-      let response = await fetch(dataURL);
-      if (response.ok) {
-        let data = await response.json();
-
-        setFeatItem(data);
-      } else {
-        setError(`Server error: ${response.status} ${response.statusText}`);
-      }
-    } catch (err) {
-      setError(`Network error: ${error.message}`);
-    } */
-    setFeatItem(i);
-  }
-
   return (
     <div className="App">
       <Navbar />
@@ -98,12 +89,12 @@ function App() {
             path="/Add"
             element={<Cform addItem={(newItem) => handleAddItem(newItem)} />}
           />
-          <Route path="/FeatItem" element={<Cfeat featItem={featItem} />} />
-          <Route path="/Books" element={<Homegrid items={items} />} />
+          <Route path="/FeatItem/:id" element={<Cfeat />} />
+          <Route path="/Books" element={<Homegrid books={books} />} />
           <Route
             path="/Clothes"
-            element={<Cgrid items={items} showItem={(id) => showItem(id)} />}
-            //element={<Cgrid items={items} />}
+            element={<Cgrid items={items} />}
+            
           />
         </Routes>
       </div>
@@ -112,6 +103,3 @@ function App() {
 }
 
 export default App;
-//taking chances and erasing the id from the inside of this showItem={(id) => showItem(id)} didn't work
-//now add doesn't work, and console shows getItems being used, this is a nightmare
-//delete={(id) => deleteItem(id)

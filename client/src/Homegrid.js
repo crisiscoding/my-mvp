@@ -4,19 +4,23 @@ import React, { useEffect, useState } from "react";
 import "./Homegrid.css";
 
 function Homegrid(props) {
-  //missing
+  console.log(props.books, "inside Homegrid");
 
   return (
-    <div className="Homegrid">
-      {props.items.map((i) => (
+    <div className="Books">
+      {props.books.map((i) => (
         <div key={i.id}>
-          <p>{i.notes}</p>
           <img
-            className="Homegrid img"
+            className="Books img"
             src={i.picture}
-            alt={i.title}
-            onClick={() => props.showItem(i.id)}
+            /* alt={i.title} */
+            /* onClick={() => props.showItem(i.id)} */
           />
+          <p>{i.title}</p>
+          <p>{i.author}</p>
+          <p>{i.genre}</p>
+          <p>{i.publisher}</p>
+          <p>{i.notes}</p>
         </div>
       ))}
     </div>

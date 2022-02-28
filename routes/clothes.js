@@ -1,12 +1,9 @@
 var express = require("express");
 var router = express.Router();
 const db = require("../model/helper");
-//Wed, 23 Feb 2022 11:24:14 GMT express deprecated res.send(status, body): Use res.status(status).send(body) instead at routes\clothes.js:111:21
-//node:internal/errors:464
-//  ErrorCaptureStackTrace(err);
 
 router.get("/", async (req, res) => {
-  //this seems to work through postman, with info too!
+  //connected to App, Cgrid
   try {
     let results = await db("SELECT * FROM clothes ORDER BY id ASC;");
 
@@ -17,7 +14,7 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/:id", async (req, res, next) => {
-  //works!
+  //connected to Cfeat
   let id = req.params.id;
   try {
     let result = await db(`SELECT * FROM clothes WHERE  id = ${id}`);
@@ -32,8 +29,7 @@ router.get("/:id", async (req, res, next) => {
 });
 
 router.post("/", async (req, res) => {
-  //had an ugly syntax error because condition was a protected word, changed it to ready_to_use
-  //got rid of id here, Sofia told me it's autoincrement.
+  //connected to App, Cform
   let {
     picture,
     extra_pic,
@@ -59,9 +55,6 @@ router.post("/", async (req, res) => {
     VALUES ('${picture}','${extra_pic}','${closet_section}','${date_purchase}', ${price},'${shop}','${brand}','${season}',${new_or_not},${ready_to_use},'${materials}','${wash_sched}','${wash_info}', ${feeling},${upgrade},'${notes}');
   `;
 
-  //THIS one worked in MySql, I changed condition now to ready_to_use
-  //INSERT INTO clothes ( picture, extra_pic, closet_section, date_purchase, price, shop, brand, season, new_or_not, ready_to_use, materials, wash_sched, wash_info, feeling, upgrade, notes) VALUES ('whateverpic', 'extrapic','tops','2000-10-10', 20,'zara','zara','winter', 1, 1,'cotton','never','none', 5, 1,'sick of this');
-
   try {
     await db(sql);
 
@@ -74,7 +67,8 @@ router.post("/", async (req, res) => {
 });
 
 router.put("/:id", async (req, res) => {
-  let id = req.params.id; //It works through postman!
+  //It works through postman. Not implemented on frontend yet. Should connect to Cfeat and take to a prefilled Cform.
+  let id = req.params.id;
   try {
     let result = await db(`SELECT * FROM clothes WHERE  id = ${id}`);
     if (result.data.length === 1) {
@@ -102,7 +96,7 @@ router.put("/:id", async (req, res) => {
       price= ${price}, shop= '${shop}', brand= '${brand}', season= '${season}', new_or_not= ${new_or_not}, ready_to_use= ${ready_to_use}, 
       materials= '${materials}', wash_sched= '${wash_sched}', wash_info= '${wash_info}', feeling= ${feeling}, upgrade= ${upgrade}, notes= '${notes}' 
       WHERE id = ${id} 
-      `; //that WHERE is important, otherwise everything will be substituted for the new data.
+      `;
 
       await db(sql);
       result = await db("SELECT * FROM clothes");
@@ -116,8 +110,8 @@ router.put("/:id", async (req, res) => {
 });
 
 router.delete("/:id", async (req, res) => {
-  //no idea if I really need to add all of the fields here
-  //giving me problems <pre>Cannot DELETE /clothes/3</pre>
+  //It works through postman. Not implemented on frontend yet. Should connect to Cfeat, simple botton prob.
+
   let id = req.params.id;
   try {
     let result = await db(`SELECT * FROM clothes WHERE  id = ${id}`);

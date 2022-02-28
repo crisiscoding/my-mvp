@@ -7,19 +7,19 @@ export default function Navbar() {
       <div className="link">
         <ul>
           <li>
-            <a href="/Add">+ Add new item</a>
+            <a href="/">Home</a>
           </li>
           <li>
-            <a href="/">Home</a>
+            <a href="/FeatItem/0">Featured</a>
           </li>
           <li>
             <a href="/Clothes">Clothes</a>
           </li>
           <li>
-            <a href="/Home">Books</a>
+            <a href="/Add">+ Add</a>
           </li>
           <li>
-            <a href="/FeatItem">Featured Dummy</a>
+            <a href="/Books">Books</a>
           </li>
           <li></li>
         </ul>

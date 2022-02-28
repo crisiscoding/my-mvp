@@ -115,34 +115,14 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-router.delete("/", async (req, res) => {
+router.delete("/:id", async (req, res) => {
   //no idea if I really need to add all of the fields here
   //giving me problems <pre>Cannot DELETE /clothes/3</pre>
-  let id = req.params.todo_id;
+  let id = req.params.id;
   try {
     let result = await db(`SELECT * FROM clothes WHERE  id = ${id}`);
 
     if (result.data.length === 1) {
-      let {
-        id,
-        picture,
-        extra_pic,
-        closet_section,
-        date_purchase,
-        price,
-        shop,
-        brand,
-        season,
-        new_or_not,
-        ready_to_use,
-        materials,
-        wash_sched,
-        wash_info,
-        feeling,
-        upgrade,
-        notes,
-      } = req.body;
-
       await db(`DELETE FROM clothes WHERE id = ${id}`);
       result = await db("SELECT * FROM clothes");
       res.send(result.data);

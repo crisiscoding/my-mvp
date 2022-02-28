@@ -2,10 +2,11 @@ import React, { useEffect } from "react";
 import "./Cfeat.css";
 
 export default function Cfeat(props) {
-  <div>Cfeat</div>;
-  let fi = props.featItem;
+  <div>Feautured</div>;
   useEffect(() => {}, [props.featItem]);
-
+  console.log(props.featItem, props.featItem.notes, "we got to the component"); //undefined, undefined
+  let fi = props.featItem;
+  //<button onClick={()=> props.delete(i.id)}>Delete</button>  <button onClick={}>Modify</button>
   return (
     <div className="FeaturedItem">
       <img src={fi.picture} alt={fi.notes} />

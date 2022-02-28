@@ -19,30 +19,25 @@ import Cfeat from "./Cfeat";
 
 function App() {
   //all the const for states and functions
+
   const [items, setItems] = useState([]);
 
-  //idk it had  DefaultItems and DefaultItems[0] for feat
-  //const [featItem, setFeatItem] = useState(postman_data[0]);
   const [error, setError] = useState();
   const [featItem, setFeatItem] = useState(postman_data[0]);
   useEffect(() => {
     getItems();
-  }, []);
+  }, []); //now getItems is called anytime any component is rendered.  //postman_data[0]   //items[4]
 
-  //const handleAddItem = (newItem) => {
-  //setItems((state) => [...state, newItem]);};
-
-  //from my miles5, unfinished
   async function handleAddItem(input) {
     let options = {
       method: "POST",
       headers: {
-        "Content-Type": "application/json", //data format
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(input),
     };
     let data = null;
-
+    console.log("inside App.handleAddItem");
     try {
       let response = await fetch("/clothes", options);
       if (response.ok) {
@@ -56,14 +51,11 @@ function App() {
     }
     return data;
   }
-  //copied from meen&holly
-
-  //copied from fetch
 
   async function getItems() {
-    //for grid
+    //it works
     let dataURL = `/clothes`;
-    console.log("we are here");
+    console.log("inside App.getItems");
     try {
       let response = await fetch(dataURL);
       if (response.ok) {
@@ -78,11 +70,22 @@ function App() {
     }
   }
 
-  function showItem(id) {
-    console.log("here", id);
-    let featItem = items.find((p) => p.id === id);
-    console.log(featItem);
-    setFeatItem(featItem);
+  async function showItem(i) {
+    /* let dataURL = `/clothes/${id}`;
+    console.log("inside App.showItem", dataURL);
+    try {
+      let response = await fetch(dataURL);
+      if (response.ok) {
+        let data = await response.json();
+
+        setFeatItem(data);
+      } else {
+        setError(`Server error: ${response.status} ${response.statusText}`);
+      }
+    } catch (err) {
+      setError(`Network error: ${error.message}`);
+    } */
+    setFeatItem(i);
   }
 
   return (
@@ -96,10 +99,11 @@ function App() {
             element={<Cform addItem={(newItem) => handleAddItem(newItem)} />}
           />
           <Route path="/FeatItem" element={<Cfeat featItem={featItem} />} />
-          <Route path="/Homewares" element={<Homegrid items={items} />} />
+          <Route path="/Books" element={<Homegrid items={items} />} />
           <Route
             path="/Clothes"
             element={<Cgrid items={items} showItem={(id) => showItem(id)} />}
+            //element={<Cgrid items={items} />}
           />
         </Routes>
       </div>
@@ -109,3 +113,5 @@ function App() {
 
 export default App;
 //taking chances and erasing the id from the inside of this showItem={(id) => showItem(id)} didn't work
+//now add doesn't work, and console shows getItems being used, this is a nightmare
+//delete={(id) => deleteItem(id)

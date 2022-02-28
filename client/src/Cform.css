@@ -5,6 +5,11 @@
   text-align: center;
   display: block;
   margin-bottom: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 450px;
+  gap: 20px;
+  text-align: left;
 }
 
 label {

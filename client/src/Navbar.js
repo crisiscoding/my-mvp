@@ -7,7 +7,7 @@ export default function Navbar() {
       <div className="link">
         <ul>
           <li>
-            <a href="/Add">Add new item</a>
+            <a href="/Add">+ Add new item</a>
           </li>
           <li>
             <a href="/">Home</a>
@@ -16,22 +16,12 @@ export default function Navbar() {
             <a href="/Clothes">Clothes</a>
           </li>
           <li>
-            <a href="/Home">Homewares</a>
+            <a href="/Home">Books</a>
           </li>
           <li>
             <a href="/FeatItem">Featured Dummy</a>
           </li>
-          <li>
-            {" "}
-            Sort by feeling
-            <select>
-              {" "}
-              <option value="spring">Love</option>
-              <option value="summer">Like</option>
-              <option value="fall">It's ok</option>
-              <option value="winter">meh</option>
-            </select>
-          </li>
+          <li></li>
         </ul>
       </div>
     </nav>

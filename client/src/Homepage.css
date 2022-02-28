@@ -2,3 +2,11 @@ body {
   background-color: #cccccc;
   background-size: contain no-repeat;
 }
+
+div {
+  width: auto;
+}
+
+li {
+  text-align: left;
+}

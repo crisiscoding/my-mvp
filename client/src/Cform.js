@@ -44,27 +44,28 @@ function Cform(props) {
     setItem(EMPTY_FORM);
   };
 
-  async function addItem() {
-    let options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(item),
-    };
+  // async function addItem() {
+  //   //why is this greyed out?!!! it might be repeated from handleAdd in App
+  //   let options = {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(item),
+  //   };
 
-    try {
-      let response = await fetch("/idk", options);
-      if (response.ok) {
-        let data = await response.json();
-        setItem(data); //not sure about this
-      } else {
-        console.log(`server error: ${response.status}`);
-      }
-    } catch (error) {
-      console.log(`network error: ${error.message}`);
-    }
-  }
+  //   try {
+  //     let response = await fetch("/clothes", options);
+  //     if (response.ok) {
+  //       let data = await response.json();
+  //       setItem(data);
+  //     } else {
+  //       console.log(`server error: ${response.status}`);
+  //     }
+  //   } catch (error) {
+  //     console.log(`network error: ${error.message}`);
+  //   }
+  // }
 
   //-------
   return (
